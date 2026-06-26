@@ -1,6 +1,9 @@
-package tiendamascotas.logica;
+package tiendamascotas.logica.patrones.factory;
 
-public class PezFactory extends MascotaFactory{
+import tiendamascotas.logica.modelo.Mascota;
+import tiendamascotas.logica.modelo.mascotas.Pez;
+
+public class PezFactory extends MascotaFactory {
     @Override
     public Mascota crearMascota(String nombre){
         Mascota pez=new Pez(nombre);

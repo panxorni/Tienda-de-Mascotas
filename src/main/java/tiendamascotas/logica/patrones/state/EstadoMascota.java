@@ -1,6 +1,6 @@
 package tiendamascotas.logica.patrones.state;
 
-import tiendamascotas.logica.Mascota;
+import tiendamascotas.logica.modelo.Mascota;
 
 public interface EstadoMascota {
     void alimentar(Mascota mascota);

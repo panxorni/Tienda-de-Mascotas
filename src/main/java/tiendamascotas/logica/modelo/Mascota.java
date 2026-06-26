@@ -1,4 +1,4 @@
-package tiendamascotas.logica;
+package tiendamascotas.logica.modelo;
 
 import tiendamascotas.logica.patrones.state.EstadoMascota;
 

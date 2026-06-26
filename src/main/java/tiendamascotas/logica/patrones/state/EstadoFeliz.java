@@ -1,6 +1,6 @@
 package tiendamascotas.logica.patrones.state;
 
-import tiendamascotas.logica.Mascota;
+import tiendamascotas.logica.modelo.Mascota;
 
 public class EstadoFeliz implements EstadoMascota{
     @Override
@@ -16,5 +16,20 @@ public class EstadoFeliz implements EstadoMascota{
     @Override
     public String getNombre(){
         return "Feliz";
+    }
+
+    @Override
+    public boolean puedeVenderse() {
+        return true;
+    }
+
+    @Override
+    public String getDescripcion() {
+        return "La mascota esta feliz";
+    }
+
+    @Override
+    public boolean puedeJugar() {
+        return true;
     }
 }

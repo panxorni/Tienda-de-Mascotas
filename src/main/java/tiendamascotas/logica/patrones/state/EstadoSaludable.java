@@ -1,5 +1,7 @@
 package tiendamascotas.logica.patrones.state;
 
+import tiendamascotas.logica.modelo.Mascota;
+
 public class EstadoSaludable implements EstadoMascota {
     @Override
     public boolean puedeJugar() {
@@ -19,5 +21,15 @@ public class EstadoSaludable implements EstadoMascota {
     @Override
     public String getNombre() {
         return "Saludable";
+    }
+
+    @Override
+    public void alimentar(Mascota mascota) {
+        System.out.println(mascota.getNombre() + "fue alimentada");
+    }
+
+    @Override
+    public void jugar(Mascota mascota) {
+        System.out.println(getNombre() + "esta jugando");
     }
 }
