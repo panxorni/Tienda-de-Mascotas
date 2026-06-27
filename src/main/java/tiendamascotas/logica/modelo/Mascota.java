@@ -1,8 +1,8 @@
 package tiendamascotas.logica.modelo;
-
+import tiendamascotas.logica.patrones.observer.SujetoObservable;
 import tiendamascotas.logica.patrones.state.EstadoMascota;
 
-public abstract class Mascota {
+public abstract class Mascota extends SujetoObservable {
     private String nombre;
     private EstadoMascota estado;
     private int felicidad;
