@@ -1,4 +1,4 @@
-package logica.patrones.observer;
+package tiendamascotas.logica.patrones.observer;
 
 public interface ObservadorMascotas {
 
