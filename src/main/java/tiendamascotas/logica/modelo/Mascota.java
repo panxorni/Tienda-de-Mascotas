@@ -10,7 +10,11 @@ public abstract class Mascota extends SujetoObservable {
     private int hambre;
 
     public Mascota(String nombre){
+
         this.nombre=nombre;
+        this.felicidad = 100; // Nace feliz
+        this.salud = 100;     // Nace con salud max
+        this.hambre = 0;      // Nace sin hambre
     }
 
     public void alimentar(){
