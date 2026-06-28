@@ -1,6 +1,7 @@
 package tiendamascotas.logica.modelo;
 import tiendamascotas.logica.patrones.observer.SujetoObservable;
 import tiendamascotas.logica.patrones.state.EstadoMascota;
+import tiendamascotas.logica.patrones.state.EstadoSaludable;
 
 public abstract class Mascota extends SujetoObservable {
     private String nombre;
@@ -12,6 +13,7 @@ public abstract class Mascota extends SujetoObservable {
     public Mascota(String nombre){
 
         this.nombre=nombre;
+        this.estado= new EstadoSaludable();
         this.felicidad = 100; // Nace feliz
         this.salud = 100;     // Nace con salud max
         this.hambre = 0;      // Nace sin hambre
