@@ -70,6 +70,7 @@ public abstract class Mascota extends SujetoObservable {
 
     public void setFelicidad(int felicidad){
         this.felicidad = limitar(felicidad);
+        actualizarEstado();
         // Detonante de aburrimiento/tristeza
         if (this.felicidad < 30) {
             notificarObservadores(this.nombre, "Aburrimiento", "¡" + this.nombre + " está muy triste y necesita jugar!");
@@ -78,6 +79,7 @@ public abstract class Mascota extends SujetoObservable {
 
     public void setSalud(int salud){
         this.salud = limitar(salud);
+        actualizarEstado();
         // Detonante de enfermedad
         if (this.salud < 40) {
             notificarObservadores(this.nombre, "Enfermedad", "¡La salud de " + this.nombre + " está bajando! Necesita medicina.");
@@ -86,6 +88,7 @@ public abstract class Mascota extends SujetoObservable {
 
     public void setHambre(int hambre){
         this.hambre = limitar(hambre);
+        actualizarEstado();
         // Detonante de hambre
         if (this.hambre > 80) {
             notificarObservadores(this.nombre, "Hambre", "¡" + this.nombre + " tiene mucha hambre!");
