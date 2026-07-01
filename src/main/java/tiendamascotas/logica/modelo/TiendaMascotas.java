@@ -79,4 +79,35 @@ public class TiendaMascotas {
         presupuesto=presupuesto- costoTotal;
         inventario.agregarSuministro(tipo, cantidad);
     }
+//Metodo para alimentar una mascota, consume un suministro del tipo correspondiente al ejecutarse
+    public void alimentarMascota(Mascota mascota, TipoSuministro tipoComida){
+        validarMascotaEnTienda(mascota);
+        inventario.usarSuministro(tipoComida, 1);
+        mascota.alimentar();
+    }
+
+    public void jugarConMascota(Mascota mascota){
+        validarMascotaEnTienda(mascota);
+        mascota.jugar();
+    }
+
+    public void limpiarHabitat(Mascota mascota){
+        validarMascotaEnTienda(mascota);
+        mascota.limpiarHabitat();
+    }
+    //Metodo para curar consume un medicamento
+    public void darMedicina(Mascota mascota){
+        validarMascotaEnTienda(mascota);
+        inventario.usarSuministro(TipoSuministro.MEDICAMENTOS, 1);
+        mascota.darMedicina();
+    }
+    //Metodo para validar la existencia de la mascota en la tienda
+    private void validarMascotaEnTienda(Mascota mascota){
+        if (mascota == null){
+            throw new IllegalArgumentException("La mascota no puede ser nula");
+        }
+        if (!mascotas.contains(mascota)){
+            throw new IllegalArgumentException("La mascota no pertenece a la tienda");
+        }
+    }
 }

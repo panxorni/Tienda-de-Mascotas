@@ -18,8 +18,12 @@ public  class Main {
          System.out.println("Presupuesto después de compras: " + tienda.getPresupuesto());
          System.out.println("cantidad de mascotas: " + tienda.getMascotas().size());
          System.out.println("cantidad de alimento: " + tienda.getInventario().consultarCantidad(TipoSuministro.COMIDA_PERRO));
-        tienda.usarSuministro(TipoSuministro.COMIDA_PERRO, 1);
-        perro.alimentar();
+
+         /* Antes de los cambios se tenia que hacer esto, pero ahora se puede hacer lo siguiente
+         tienda.usarSuministro(TipoSuministro.COMIDA_PERRO, 1);
+         perro.alimentar();
+          */
+         tienda.alimentarMascota(perro, TipoSuministro.COMIDA_PERRO);
 
         System.out.println();
         System.out.println();
