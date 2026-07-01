@@ -80,9 +80,9 @@ public class TiendaMascotas {
         inventario.agregarSuministro(tipo, cantidad);
     }
 //Metodo para alimentar una mascota, consume un suministro del tipo correspondiente al ejecutarse
-    public void alimentarMascota(Mascota mascota, TipoSuministro tipoComida){
+    public void alimentarMascota(Mascota mascota){
         validarMascotaEnTienda(mascota);
-        inventario.usarSuministro(tipoComida, 1);
+        inventario.usarSuministro(mascota.getTipoComida(), 1);
         mascota.alimentar();
     }
 

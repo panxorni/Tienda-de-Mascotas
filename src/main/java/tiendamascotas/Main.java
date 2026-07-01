@@ -23,7 +23,7 @@ public  class Main {
          tienda.usarSuministro(TipoSuministro.COMIDA_PERRO, 1);
          perro.alimentar();
           */
-         tienda.alimentarMascota(perro, TipoSuministro.COMIDA_PERRO);
+         tienda.alimentarMascota(perro);
 
         System.out.println();
         System.out.println();

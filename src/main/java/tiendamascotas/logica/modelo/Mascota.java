@@ -1,4 +1,5 @@
 package tiendamascotas.logica.modelo;
+import tiendamascotas.logica.modelo.suministros.TipoSuministro;
 import tiendamascotas.logica.patrones.observer.SujetoObservable;
 import tiendamascotas.logica.patrones.state.EstadoFeliz;
 import tiendamascotas.logica.patrones.state.EstadoHambriento;
@@ -20,6 +21,9 @@ public abstract class Mascota extends SujetoObservable {
         this.salud = 100;     // Nace con salud max
         this.hambre = 0;      // Nace sin hambre
     }
+    //Metodo para saber que comida corresponde a cada mascota
+    public abstract TipoSuministro getTipoComida();
+
 //Metodo para alimentar
     public void alimentar(){
         setHambre(hambre - 30);
