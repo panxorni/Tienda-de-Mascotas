@@ -78,7 +78,7 @@ public class VentanaPrincipal extends JFrame {
     }
 
     //método para actualizar el label presupuesto
-    private void actualizarPresupuesto(int presupuesto){
+    public void actualizarPresupuesto(int presupuesto){
         lblPresupuesto.setText("presupuesto: $" + presupuesto);
     }
 

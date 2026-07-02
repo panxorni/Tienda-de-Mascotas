@@ -12,7 +12,7 @@ public  class Main {
              TiendaMascotas tienda = new TiendaMascotas(100000);
              VentanaPrincipal ventana = new VentanaPrincipal();
 
-             //new ControladorJuego(tienda, ventana);
+             new ControladorJuego(tienda, ventana);
 
              ventana.setVisible(true);
          });
