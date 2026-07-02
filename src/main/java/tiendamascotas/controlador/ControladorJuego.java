@@ -77,6 +77,11 @@ public class ControladorJuego {
 
             tienda.comprarMascota(mascota, precio);
 
+            registrarAccion(
+                    "Compra",
+                    "Compraste un " + tipoMascota + " llamado " + mascota.getNombre() + " por $" + precio + "."
+            );
+
             refrescarPantalla();
         }catch (Exception e){
             mostrarError(e.getMessage());
@@ -87,6 +92,11 @@ public class ControladorJuego {
     private void comprarSuministro(TipoSuministro tipoSuministro, int cantidad, int precioPorUnidad){
         try{
             tienda.comprarSuministro(tipoSuministro, cantidad, precioPorUnidad);
+
+            registrarAccion(
+                    "Compra",
+                    "Compraste " + cantidad + " unidad(es) de " + tipoSuministro.name() + "."
+            );
 
             refrescarPantalla();
         }catch (Exception e){
@@ -115,6 +125,12 @@ public class ControladorJuego {
             }
 
             tienda.alimentarMascota(mascota);
+
+            registrarAccion(
+                    "Alimentar",
+                    "Alimentaste a " + mascota.getNombre() + "."
+            );
+
             refrescarPantalla();
         }catch (Exception e){
             mostrarError(e.getMessage());
@@ -131,6 +147,12 @@ public class ControladorJuego {
             }
 
             tienda.jugarConMascota(mascota);
+
+            registrarAccion(
+                    "Jugar",
+                    "Jugaste con " + mascota.getNombre() + "."
+            );
+
             refrescarPantalla();
         } catch (Exception e) {
             mostrarError(e.getMessage());
@@ -147,6 +169,12 @@ public class ControladorJuego {
             }
 
             tienda.limpiarHabitat(mascota);
+
+            registrarAccion(
+                    "Limpieza",
+                    "Limpiaste el habitat de " + mascota.getNombre() + "."
+            );
+
             refrescarPantalla();
         }catch (Exception e){
             mostrarError(e.getMessage());
@@ -163,6 +191,12 @@ public class ControladorJuego {
             }
 
             tienda.darMedicina(mascota);
+
+            registrarAccion(
+                    "Medicina",
+                    "Le diste medicina a " + mascota.getNombre() + "."
+            );
+
             refrescarPantalla();
         }catch (Exception e){
             mostrarError(e.getMessage());
@@ -179,6 +213,12 @@ public class ControladorJuego {
             }
 
             tienda.venderMascota(mascota, 700);
+
+            registrarAccion(
+                    "Venta",
+                    "Vendiste a " + mascota.getNombre() + " por $700."
+            );
+
             refrescarPantalla();
         }catch (Exception e){
             mostrarError(e.getMessage());
@@ -202,5 +242,10 @@ public class ControladorJuego {
                 "Error",
                 JOptionPane.ERROR_MESSAGE
         );
+    }
+
+    //metodo para registrar cada acción, se utiliza después de cada acción ejecutada correctamente
+    private void registrarAccion(String tipoAccion, String mensaje){
+        ventana.getPanelAlertas().actualizarAlerta("Sistema", tipoAccion, mensaje);
     }
 }
