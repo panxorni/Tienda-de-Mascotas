@@ -21,6 +21,7 @@ public class ControladorJuego {
         refrescarPantalla();
     }
 
+    //metodo que contiene todos los listeners para cada acción
     private void conectarEventos(){
         ventana.getMercadoPanel().getBtnComprarPerro().addActionListener(e ->
                 comprarMascotaConFactory(new PerroFactory(), "Perro", 500));
@@ -48,8 +49,19 @@ public class ControladorJuego {
 
         ventana.getMercadoPanel().getBtnComprarMedicina().addActionListener(e ->
                 comprarSuministro(TipoSuministro.MEDICAMENTOS, 1, 200));
+
+        ventana.getBtnAlimentar().addActionListener(e -> alimentarMascota());
+
+        ventana.getBtnJugar().addActionListener(e -> jugarConMascota());
+
+        ventana.getBtnLimpiar().addActionListener(e -> limpiarHabitat());
+
+        ventana.getBtnDarMedicina().addActionListener(e -> darMedicina());
+
+        ventana.getBtnVender().addActionListener(e -> venderMascota());
     }
 
+    //metodo para poder comprar una mascota en el ActionEvent con un factory
     private void comprarMascotaConFactory(MascotaFactory factory, String tipoMascota, int precio){
         try{
             String nombre = JOptionPane.showInputDialog(
@@ -71,6 +83,7 @@ public class ControladorJuego {
         }
     }
 
+    //metodo para comprar suministros de tipo correspondiente
     private void comprarSuministro(TipoSuministro tipoSuministro, int cantidad, int precioPorUnidad){
         try{
             tienda.comprarSuministro(tipoSuministro, cantidad, precioPorUnidad);
@@ -81,6 +94,98 @@ public class ControladorJuego {
         }
     }
 
+    //metodo para obtener la mascota seleccionada para todos los metodos que lo necesiten
+    private Mascota obtenerMascotaSeleccionada(){
+        int indice = ventana.getInventarioPanel().getIndiceMascotaSeleccionada();
+
+        if(indice == -1){
+            mostrarError("Debe seleccionar una mascota del inventario");
+            return null;
+        }
+        return tienda.getMascotas().get(indice);
+    }
+
+    //metodo alimenta a la mascota seleccionada
+    private void alimentarMascota(){
+        try{
+            Mascota mascota = obtenerMascotaSeleccionada();
+
+            if (mascota == null){
+                return;
+            }
+
+            tienda.alimentarMascota(mascota);
+            refrescarPantalla();
+        }catch (Exception e){
+            mostrarError(e.getMessage());
+        }
+    }
+
+    //metodo juega con la mascota seleccionada
+    private void jugarConMascota(){
+        try {
+            Mascota mascota = obtenerMascotaSeleccionada();
+
+            if (mascota == null){
+                return;
+            }
+
+            tienda.jugarConMascota(mascota);
+            refrescarPantalla();
+        } catch (Exception e) {
+            mostrarError(e.getMessage());
+        }
+    }
+
+    //metodo limpia el habitat de la mascota seleccionada
+    private void limpiarHabitat(){
+        try{
+            Mascota mascota = obtenerMascotaSeleccionada();
+
+            if (mascota == null){
+                return;
+            }
+
+            tienda.limpiarHabitat(mascota);
+            refrescarPantalla();
+        }catch (Exception e){
+            mostrarError(e.getMessage());
+        }
+    }
+
+    //metodo da medicina a la mascota seleccionada
+    private void darMedicina(){
+        try{
+            Mascota mascota = obtenerMascotaSeleccionada();
+
+            if(mascota == null){
+                return;
+            }
+
+            tienda.darMedicina(mascota);
+            refrescarPantalla();
+        }catch (Exception e){
+            mostrarError(e.getMessage());
+        }
+    }
+
+    //metodo vende mascota seleccionada
+    private void venderMascota(){
+        try{
+            Mascota mascota = obtenerMascotaSeleccionada();
+
+            if (mascota == null){
+                return;
+            }
+
+            tienda.venderMascota(mascota, 700);
+            refrescarPantalla();
+        }catch (Exception e){
+            mostrarError(e.getMessage());
+        }
+    }
+
+    //metodo usado para refrescar la pantalla después de cualquier acción
     private void refrescarPantalla(){
         ventana.actualizarPresupuesto(tienda.getPresupuesto());
 
@@ -89,6 +194,7 @@ public class ControladorJuego {
         ventana.getInventarioPanel().refrescarListaMascotas(tienda.getMascotas());
     }
 
+    //metodo para mostrar un mensaje de error formateado
     private void mostrarError(String mensaje){
         JOptionPane.showMessageDialog(
                 ventana,

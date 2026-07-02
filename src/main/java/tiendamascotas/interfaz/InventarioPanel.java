@@ -89,4 +89,9 @@ public class InventarioPanel extends JPanel {
             modeloListaMascotas.addElement(datos);
         }
     }
+
+    //metodo para obtener la mascota seleccionada
+    public int getIndiceMascotaSeleccionada(){
+        return listaMascotas.getSelectedIndex();
+    }
 }
