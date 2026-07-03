@@ -7,7 +7,6 @@ import java.util.List;
 import tiendamascotas.logica.modelo.suministros.Inventario;
 import tiendamascotas.logica.modelo.suministros.TipoSuministro;
 
-
 public class TiendaMascotas {
     private int presupuesto;
     private List<Mascota> mascotas;
@@ -19,6 +18,41 @@ public class TiendaMascotas {
         this.presupuesto= presupuestoInicial;
         this.inventario= new Inventario();
         this.mascotas= new ArrayList<>();
+    }
+
+    public Mascota buscarMascota(TipoMascota tipoMascota){
+        if( tipoMascota== null){
+            throw new IllegalArgumentException("el tipo de mascota no puede ser nulo");
+        }
+        for(Mascota mascota: mascotas){
+            if(mascota.getTipo()== tipoMascota){
+                return mascota;
+            }
+        }
+        return null;
+    }
+
+    public boolean venderMascotaACliente(ClienteVirtual clienteVirtual, int precioVenta){
+        if(clienteVirtual== null){
+            throw  new IllegalArgumentException("el cliente no puede ser nulo");
+        }
+        if(precioVenta< 0){
+            throw  new IllegalArgumentException("el precio de venta no puede ser negativo");
+        }
+        if (clienteVirtual.getPresupuesto()< precioVenta){
+            return false;
+        }
+        Mascota mascota= buscarMascota(clienteVirtual.getTipoMascotaNecesitada());
+
+        if (mascota== null){
+            return false;
+        }
+
+        if(!mascota.getEstado().puedeVenderse()){
+            return false;
+        }
+        venderMascota(mascota, precioVenta);
+        return true;
     }
 
     public int getPresupuesto(){
