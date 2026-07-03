@@ -5,13 +5,18 @@ import tiendamascotas.logica.modelo.Mascota;
 import tiendamascotas.logica.modelo.TiendaMascotas;
 import tiendamascotas.logica.modelo.suministros.TipoSuministro;
 import tiendamascotas.logica.patrones.factory.*;
+import  tiendamascotas.logica.modelo.ClienteVirtual;
+import  tiendamascotas.logica.modelo.TipoMascota;
 
 import javax.swing.*;
+import java.util.Random;
 
 //Esta Clase conecta la interfaz con la logica.
 public class ControladorJuego {
     private TiendaMascotas tienda;
     private VentanaPrincipal ventana;
+    private Random random= new Random();
+    private Timer timerClientes;
 
     public ControladorJuego(TiendaMascotas tienda, VentanaPrincipal ventana){
         this.tienda=tienda;
@@ -19,6 +24,7 @@ public class ControladorJuego {
 
         conectarEventos();
         refrescarPantalla();
+        iniciarLlegadaClienteAleatorio();
     }
 
     //metodo que contiene todos los listeners para cada acción
@@ -247,5 +253,66 @@ public class ControladorJuego {
     //metodo para registrar cada acción, se utiliza después de cada acción ejecutada correctamente
     private void registrarAccion(String tipoAccion, String mensaje){
         ventana.getPanelAlertas().actualizarAlerta("Sistema", tipoAccion, mensaje);
+    }
+
+    private void  iniciarLlegadaClienteAleatorio(){
+        programarLlegadaClienteNuevo();
+    }
+
+    private int obtenerPrecioAnimal(TipoMascota tipoMascota){
+        return switch (tipoMascota){
+            case PERRO -> 700;
+            case GATO -> 650;
+            case PAJARO -> 450;
+            case PEZ -> 300;
+        };
+    }
+
+    private void procesarLlegadaCliente(){
+        ClienteVirtual clienteVirtual= generarElClienteAleatorio();
+        ventana.getClientePanel().mostrarCliente(clienteVirtual);
+        registrarAccion("Cliente", "Llegó "+ clienteVirtual.getNombre()+ " quiere una mascota tipo "+ clienteVirtual.getTipoMascotaNecesitada()+ " con este presupuesto: $"+ clienteVirtual.getPresupuesto());
+        boolean quiereComprar= random.nextBoolean();
+
+        if(!quiereComprar){
+            ventana.getClientePanel().actualizarResultados("No compró");
+            registrarAccion("Cliente", clienteVirtual.getNombre()+ " decidio no comprar");
+            return;
+        }
+        int precioVenta= obtenerPrecioAnimal(clienteVirtual.getTipoMascotaNecesitada());
+        boolean ventaExitosa= tienda.venderMascotaACliente(clienteVirtual, precioVenta);
+
+        if(ventaExitosa){
+            ventana.getClientePanel().actualizarResultados("La compra ha sido exitosa");
+            registrarAccion("Venta", clienteVirtual.getNombre()+ "ha comprado una mascota tipo "+ clienteVirtual.getTipoMascotaNecesitada()+ " por "+ precioVenta);
+        }
+        else {
+            ventana.getClientePanel().actualizarResultados("No hubo compra");
+            registrarAccion("Cliente", clienteVirtual.getNombre()+ " no pudo realizar su compra por falta de animales o presupuesto");
+        }
+        refrescarPantalla();
+    }
+
+    private void programarLlegadaClienteNuevo(){
+        int tiempoAleatorio= 10000+ random.nextInt(30000);
+
+        timerClientes= new Timer(tiempoAleatorio, e ->{
+            procesarLlegadaCliente();
+            timerClientes.stop();
+            programarLlegadaClienteNuevo();
+        });
+        timerClientes.setRepeats(false);
+        timerClientes.start();
+    }
+
+    private ClienteVirtual generarElClienteAleatorio(){
+        String[] nombres= { "Joaquin", "Alan", "Bastian", "Matias", "Gabriel", "Francisco", "Eduardo", "Maite", "Sergio", "Daniela", "Mirella", "Abelardo", "Maria", "Sebastian", "Mateo", "Simon", "Audilia", "Valentina", "Amanda", "Lucas"};
+
+        TipoMascota[] tipos= TipoMascota.values();
+        String nombre= nombres[random.nextInt(nombres.length)];
+        TipoMascota tipoBuscado= tipos[random.nextInt(tipos.length)];
+        int presupuestoCliente= 300+ random.nextInt(700);
+
+        return new ClienteVirtual(nombre, tipoBuscado, presupuestoCliente);
     }
 }

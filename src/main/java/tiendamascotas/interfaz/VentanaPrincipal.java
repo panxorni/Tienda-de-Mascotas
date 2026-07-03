@@ -17,6 +17,8 @@ public class VentanaPrincipal extends JFrame {
     private JButton btnDarMedicina;
     private JButton btnVender;
 
+    private ClientePanel clientePanel;
+
     //Método constructor de ventana principal.
     //Al llamarlo ejecuta, la configuración de la ventana más la creacion y organizacion de componentes
     public VentanaPrincipal(){
@@ -48,6 +50,8 @@ public class VentanaPrincipal extends JFrame {
         btnLimpiar = new JButton("Limpiar habitat");
         btnDarMedicina = new JButton("Dar medicina");
         btnVender = new JButton("Vender mascota");
+
+        clientePanel= new ClientePanel();
     }
 
     //método para organizar componentes, modificar el layout mas adelante
@@ -67,8 +71,11 @@ public class VentanaPrincipal extends JFrame {
 
         //panelDerecho contiene al panelAcciones y panelAlertas
         JPanel panelDerecho = new JPanel(new BorderLayout(5,5));
+        panelDerecho.setPreferredSize(new Dimension(340, 0));
+        panelAlertas.setPreferredSize(new Dimension(340, 280));
         panelDerecho.add(panelAcciones, BorderLayout.NORTH);
-        panelDerecho.add(panelAlertas, BorderLayout.CENTER);
+        panelDerecho.add(clientePanel, BorderLayout.CENTER);
+        panelDerecho.add(panelAlertas, BorderLayout.SOUTH);
 
         //agrega los paneles a la ventana
         add(panelSuperior, BorderLayout.NORTH);
@@ -114,5 +121,9 @@ public class VentanaPrincipal extends JFrame {
 
     public JButton getBtnVender() {
         return btnVender;
+    }
+
+    public ClientePanel getClientePanel(){
+        return clientePanel;
     }
 }
