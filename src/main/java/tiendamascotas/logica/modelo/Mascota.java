@@ -5,6 +5,7 @@ import tiendamascotas.logica.patrones.state.EstadoFeliz;
 import tiendamascotas.logica.patrones.state.EstadoHambriento;
 import tiendamascotas.logica.patrones.state.EstadoMascota;
 import tiendamascotas.logica.patrones.state.EstadoSaludable;
+import tiendamascotas.logica.modelo.TipoMascota;
 
 public abstract class Mascota extends SujetoObservable {
     private String nombre;
@@ -23,6 +24,9 @@ public abstract class Mascota extends SujetoObservable {
     }
     //Metodo para saber que comida corresponde a cada mascota
     public abstract TipoSuministro getTipoComida();
+
+    //Metodo para saber que tipo de mascota es
+    public abstract TipoMascota getTipo();
 
 //Metodo para alimentar
     public void alimentar(){
