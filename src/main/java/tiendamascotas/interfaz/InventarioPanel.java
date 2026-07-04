@@ -7,13 +7,23 @@ import java.util.Map;
 import tiendamascotas.logica.modelo.Mascota;
 import tiendamascotas.logica.modelo.suministros.TipoSuministro;
 
+/**
+ * Panel gráfico encargado de representar visualmente el inventario general de la tienda.
+ * Muestra el stock disponible de suministros en el almacén y una lista interactiva
+ * con el estado actual de todas las mascotas disponibles.
+ */
 public class InventarioPanel extends JPanel {
 
-    // 1. Se declaran los componentes visuales del inventario
+    // Se declaran los componentes visuales del inventario
     private JLabel lblStockSuministros;
     private DefaultListModel<String> modeloListaMascotas;
     private JList<String> listaMascotas;
 
+    /**
+     * Se inicializa el panel del inventario.
+     * Se configura el diseño principal y se invocan los métodos internos para construir
+     * las secciones de suministros y mascotas.
+     */
     public InventarioPanel() {
         // Se configura el panel principal del inventario
         setLayout(new BorderLayout());
@@ -25,6 +35,10 @@ public class InventarioPanel extends JPanel {
         crearSeccionMascotas();
     }
 
+    /**
+     * Se construye la sección superior del panel destinada a mostrar las cantidades
+     * de suministros (comida y medicinas) disponibles en el almacén.
+     */
     private void crearSeccionSuministros() {
         // Se crea un panel superior para el stock
         JPanel panelStock = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 5));
@@ -39,6 +53,10 @@ public class InventarioPanel extends JPanel {
         add(panelStock, BorderLayout.NORTH);
     }
 
+    /**
+     * Se construye la sección central del panel, la cual contiene una lista interactiva
+     * con barra de desplazamiento para visualizar y seleccionar las mascotas de la tienda.
+     */
     private void crearSeccionMascotas() {
         // Se inicializa el modelo y la lista para los animales
         modeloListaMascotas = new DefaultListModel<>();
@@ -57,6 +75,11 @@ public class InventarioPanel extends JPanel {
     // --- MÉTODOS DE ACTUALIZACIÓN ---
     // El Controlador usará estos métodos a través de la Ventana Principal
 
+    /**
+     * Se actualiza la etiqueta visual del inventario con las cantidades más recientes
+     * de cada tipo de suministro.
+     * @param stock Un mapa que asocia cada TipoSuministro con su cantidad entera actual en el almacén.
+     */
     public void actualizarStockSuministros(Map<TipoSuministro, Integer> stock) {
         StringBuilder sb = new StringBuilder("📦 STOCK EN ALMACÉN -> ");
 
@@ -72,6 +95,10 @@ public class InventarioPanel extends JPanel {
         lblStockSuministros.setText(sb.toString());
     }
 
+    /**
+     * Se limpia y se vuelve a cargar la lista visual de mascotas con sus atributos actualizados.
+     * @param lista Una lista de objetos Mascota que representa el inventario actual de animales en la tienda.
+     */
     public void refrescarListaMascotas(List<Mascota> lista) {
         // Se limpia la lista visual antes de recargarla
         modeloListaMascotas.clear();
@@ -90,7 +117,11 @@ public class InventarioPanel extends JPanel {
         }
     }
 
-    //metodo para obtener la mascota seleccionada
+    /**
+     * Se obtiene el índice de la mascota que el usuario ha seleccionado en la lista gráfica.
+     * @return Un número entero que representa la posición de la mascota seleccionada.
+     * Retorna -1 si no hay ninguna selección activa.
+     */
     public int getIndiceMascotaSeleccionada(){
         return listaMascotas.getSelectedIndex();
     }
