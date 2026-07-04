@@ -9,17 +9,11 @@ public class PezFactory extends MascotaFactory {
     public Mascota crearMascota(String nombre, ObservadorMascotas panel){
 
         Mascota pez=new Pez(nombre);
-        //se conecta la mascota al tiro con el panel
+        //se conecta la mascota altiro con el panel
         if (panel != null) {
             pez.agregarObservador(panel);
         }
-        /*Inicializar estados de la mascota aquí cuando este implementado el patron state
-        Por ejemplo:
-        pez.setState(new ...)
-        pez.setFelicidad(...)
-        pez.setSalud
-        entre otros
-        * */
+
         return pez;
     }
 }
