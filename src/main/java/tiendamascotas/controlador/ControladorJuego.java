@@ -294,7 +294,7 @@ public class ControladorJuego {
 
         if(ventaExitosa){
             ventana.getClientePanel().actualizarResultados("La compra ha sido exitosa");
-            registrarAccion("Venta", clienteVirtual.getNombre()+ "ha comprado una mascota tipo "+ clienteVirtual.getTipoMascotaNecesitada()+ " por "+ precioVenta);
+            registrarAccion("Venta", clienteVirtual.getNombre()+ " ha comprado una mascota tipo "+ clienteVirtual.getTipoMascotaNecesitada()+ " por "+ precioVenta);
         }
         else {
             ventana.getClientePanel().actualizarResultados("No hubo compra");
