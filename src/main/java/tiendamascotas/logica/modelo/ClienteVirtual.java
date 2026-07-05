@@ -1,9 +1,19 @@
 package tiendamascotas.logica.modelo;
 
+/*
+Esta clase representa un cliente consultando por algun animal de la tienda
+ */
+
 public class ClienteVirtual {
     private String nombre;
     private TipoMascota tipoMascotaNecesitada;
     private int presupuesto;
+
+    /**
+     * Aquí crea el cliente con su nombre,
+     * tipo de mascota que busca y presupuesto para comprar
+     */
+
     public ClienteVirtual(String nombre, TipoMascota tipoMascotaNecesitada, int presupuesto){
         if(nombre== null || nombre.trim().isEmpty()){
             throw new IllegalArgumentException("el nombre no puede ser vacio");

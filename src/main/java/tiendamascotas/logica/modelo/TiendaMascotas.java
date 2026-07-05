@@ -7,10 +7,21 @@ import java.util.List;
 import tiendamascotas.logica.modelo.suministros.Inventario;
 import tiendamascotas.logica.modelo.suministros.TipoSuministro;
 
+/*
+Esta clase representa la tienda de mascotas
+con los presupuestos, inventario, y mascotas que están disponibles
+ */
+
 public class TiendaMascotas {
     private int presupuesto;
     private List<Mascota> mascotas;
     private Inventario inventario;
+
+    /**
+     * Aquí se crea la tienda con un presupuesto, un inventario y
+     * una lista de mascotas, aún sin mascotas
+     */
+
     public TiendaMascotas(int presupuestoInicial){
         if (presupuestoInicial< 0){
             throw new IllegalArgumentException("El presupuesto no puede ser negativo");
@@ -20,6 +31,10 @@ public class TiendaMascotas {
         this.mascotas= new ArrayList<>();
     }
 
+    /**
+     * Este metodo busca el tipo de mascota que
+     * busca el cliente
+     */
     public Mascota buscarMascota(TipoMascota tipoMascota){
         if( tipoMascota== null){
             throw new IllegalArgumentException("el tipo de mascota no puede ser nulo");
@@ -32,6 +47,11 @@ public class TiendaMascotas {
         return null;
     }
 
+    /**
+     * Trata de vender una mascota si coincide con lo que hay disponible,
+     * si tiene su presupuesto suficiente y si esta en condiciones
+     * la mascota
+     */
     public boolean venderMascotaACliente(ClienteVirtual clienteVirtual, int precioVenta){
         if(clienteVirtual== null){
             throw  new IllegalArgumentException("el cliente no puede ser nulo");
@@ -70,6 +90,9 @@ public class TiendaMascotas {
         }
     }
 
+    /**
+     * Aquí se agrega una mascota a la tienda y se descuenta el precio por el que se compro
+     */
     public void comprarMascota(Mascota mascota, int precioCompra){
         if(mascota== null){
             throw  new IllegalArgumentException("la mascota no puede ser nula");
@@ -82,6 +105,9 @@ public class TiendaMascotas {
         presupuesto= presupuesto- precioCompra;
     }
 
+    /**
+     * Aquí se vende una mascota y se agrega el precio de venta al presupuesto
+     */
     public void venderMascota(Mascota mascota, int precioVenta){
         if(mascota== null){
             throw  new IllegalArgumentException("la mascota no puede ser nula");
@@ -101,6 +127,9 @@ public class TiendaMascotas {
         inventario.usarSuministro(tipo, cantidad);
     }
 
+    /**
+     * Se compran los suministros por cantidad y se descuenta del presupuesto
+     */
     public void comprarSuministro(TipoSuministro tipo, int cantidad, int precioPorUnidad){
         if (cantidad<=0){
             throw new IllegalArgumentException("la cantidad tiene que ser mayor que 0");

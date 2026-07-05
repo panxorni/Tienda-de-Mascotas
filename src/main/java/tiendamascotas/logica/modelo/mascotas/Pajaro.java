@@ -4,6 +4,9 @@ import tiendamascotas.logica.modelo.Mascota;
 import tiendamascotas.logica.modelo.TipoMascota;
 import tiendamascotas.logica.modelo.suministros.TipoSuministro;
 
+/**
+ * Representa un pajaro dentro de la tienda
+ */
 public class Pajaro extends Mascota {
     public Pajaro(String nombre){
         super(nombre);

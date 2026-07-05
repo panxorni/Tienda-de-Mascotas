@@ -255,10 +255,16 @@ public class ControladorJuego {
         ventana.getPanelAlertas().actualizarAlerta("Sistema", tipoAccion, mensaje);
     }
 
+    /**
+     * Inicia la llegada de clientes al ejecutar
+     */
     private void  iniciarLlegadaClienteAleatorio(){
         programarLlegadaClienteNuevo();
     }
 
+    /**
+     * Obtiene el precio de cada mascota
+     */
     private int obtenerPrecioAnimal(TipoMascota tipoMascota){
         return switch (tipoMascota){
             case PERRO -> 700;
@@ -268,6 +274,10 @@ public class ControladorJuego {
         };
     }
 
+    /**
+     * Procesa los datos del cliente al llegar, decide
+     * aleatoriamente si quiere comprar o no
+     */
     private void procesarLlegadaCliente(){
         ClienteVirtual clienteVirtual= generarElClienteAleatorio();
         ventana.getClientePanel().mostrarCliente(clienteVirtual);
@@ -293,8 +303,11 @@ public class ControladorJuego {
         refrescarPantalla();
     }
 
+    /**
+     * Esta parte se encarga de programar cada cuanto llega un nuevo cliente
+     */
     private void programarLlegadaClienteNuevo(){
-        int tiempoAleatorio= 10000+ random.nextInt(30000);
+        int tiempoAleatorio= 30000+ random.nextInt(30001);
 
         timerClientes= new Timer(tiempoAleatorio, e ->{
             procesarLlegadaCliente();
@@ -305,6 +318,11 @@ public class ControladorJuego {
         timerClientes.start();
     }
 
+    /**
+     * se genera un cliente con alguno de los nombres dentro de la lista,
+     * tambien elige aleatoriamente una mascota la cual decida comprar el
+     * cliente y su presupuesto
+     */
     private ClienteVirtual generarElClienteAleatorio(){
         String[] nombres= { "Joaquin", "Alan", "Bastian", "Matias", "Gabriel", "Francisco", "Eduardo", "Maite", "Sergio", "Daniela", "Mirella", "Abelardo", "Maria", "Sebastian", "Mateo", "Simon", "Audilia", "Valentina", "Amanda", "Lucas"};
 
