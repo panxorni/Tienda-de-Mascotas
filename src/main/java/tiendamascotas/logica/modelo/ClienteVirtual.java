@@ -1,7 +1,9 @@
 package tiendamascotas.logica.modelo;
 
-/*
-Esta clase representa un cliente consultando por algun animal de la tienda
+/**
+ * Representa un cliente que visita la tienda buscando una mascota.
+ * Contiene el nombre del cliente, el tipo de mascota requerido y el
+ * presupuesto disponible para la compra.
  */
 
 public class ClienteVirtual {
@@ -10,8 +12,11 @@ public class ClienteVirtual {
     private int presupuesto;
 
     /**
-     * Aquí crea el cliente con su nombre,
-     * tipo de mascota que busca y presupuesto para comprar
+     * Crea un cliente virtual.
+     *
+     * @param nombre nombre del cliente; no debe ser nulo ni vacío
+     * @param tipoMascotaNecesitada tipo de mascota requerida; no debe ser nulo
+     * @param presupuesto presupuesto disponible (entero); debe ser mayor o igual a 0
      */
 
     public ClienteVirtual(String nombre, TipoMascota tipoMascotaNecesitada, int presupuesto){
@@ -29,14 +34,29 @@ public class ClienteVirtual {
         this.presupuesto= presupuesto;
     }
 
+    /**
+     * Obtiene el presupuesto disponible del cliente.
+     *
+     * @return el presupuesto disponible (entero)
+     */
     public int getPresupuesto() {
         return presupuesto;
     }
 
+    /**
+     * Obtiene el tipo de mascota requerido por el cliente.
+     *
+     * @return el tipo de mascota requerida
+     */
     public TipoMascota getTipoMascotaNecesitada() {
         return tipoMascotaNecesitada;
     }
 
+    /**
+     * Obtiene el nombre del cliente.
+     *
+     * @return el nombre del cliente
+     */
     public String getNombre() {
         return nombre;
     }
