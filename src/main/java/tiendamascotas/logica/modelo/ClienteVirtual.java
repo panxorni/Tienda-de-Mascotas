@@ -36,7 +36,6 @@ public class ClienteVirtual {
 
     /**
      * Obtiene el presupuesto disponible del cliente.
-     *
      * @return el presupuesto disponible (entero)
      */
     public int getPresupuesto() {
@@ -45,7 +44,6 @@ public class ClienteVirtual {
 
     /**
      * Obtiene el tipo de mascota requerido por el cliente.
-     *
      * @return el tipo de mascota requerida
      */
     public TipoMascota getTipoMascotaNecesitada() {
@@ -54,7 +52,6 @@ public class ClienteVirtual {
 
     /**
      * Obtiene el nombre del cliente.
-     *
      * @return el nombre del cliente
      */
     public String getNombre() {

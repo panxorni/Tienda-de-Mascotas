@@ -1,38 +1,42 @@
 package tiendamascotas.logica.patrones.state;
 
-import tiendamascotas.logica.modelo.Mascota;
+/**
+ * Estado que representa una mascota con hambre.
+ * Al alimentarla se restaura su hambre y cambia su estado a feliz.
+ */
+public class EstadoHambriento implements EstadoMascota {
 
-public class EstadoHambriento implements EstadoMascota{
-    @Override
-    public void alimentar(Mascota mascota){
-        mascota.setHambre(0);
-
-        mascota.setFelicidad(mascota.getFelicidad()+10);
-
-        mascota.setEstado(new EstadoFeliz());
-    }
-
-    @Override
-    public void jugar(Mascota mascota){
-        mascota.setFelicidad(mascota.getFelicidad()-5);
-        System.out.println(mascota.getNombre()+ " no quiere jugar porque tiene hambre.");
-    }
-
+    /**
+     * Nombre legible del estado.
+     * @return "Hambriento"
+     */
     @Override
     public String getNombre(){
         return "Hambriento";
     }
 
+    /**
+     * Indica si la mascota puede ser vendida en este estado.
+     * @return false porque una mascota hambrienta no puede venderse
+     */
     @Override
     public boolean puedeVenderse() {
         return false;
     }
 
+    /**
+     * Descripción breve del estado.
+     * @return descripción del estado
+     */
     @Override
     public String getDescripcion() {
         return "La mascota tiene hambre";
     }
 
+    /**
+     * Indica si la mascota puede jugar estando hambrienta.
+     * @return false porque no está en condiciones de jugar
+     */
     @Override
     public boolean puedeJugar() {
         return false;
