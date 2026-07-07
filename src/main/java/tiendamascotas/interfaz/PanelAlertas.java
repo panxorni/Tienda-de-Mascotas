@@ -41,7 +41,7 @@ public class PanelAlertas extends JPanel implements ObservadorMascotas {
      * Se recibe, formatea y agrega el texto de una nueva alerta a la interfaz visual.
      * Se asegura también de que la barra de desplazamiento baje automáticamente
      * para visualizar siempre la alerta más reciente.
-     * * @param nombreMascota El nombre de la mascota que generó la alerta.
+     * @param nombreMascota El nombre de la mascota que generó la alerta.
      * @param tipoAlerta La categoría de la advertencia (por ejemplo: Hambre, Enfermedad, Aburrimiento).
      * @param mensaje El texto detallado de la notificación que informa sobre el estado crítico del animal.
      */
