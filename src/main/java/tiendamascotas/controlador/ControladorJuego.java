@@ -11,13 +11,24 @@ import  tiendamascotas.logica.modelo.TipoMascota;
 import javax.swing.*;
 import java.util.Random;
 
-//Esta Clase conecta la interfaz con la logica.
+/**
+ * Clase controladora que conecta la interfaz gráfica con la lógica de la tienda.
+ * Registra los eventos de los botones, ejecuta las acciones sobre el modelo,
+ * actualiza la pantalla y administra la llegada aleatoria de clientes virtuales.
+ */
 public class ControladorJuego {
     private TiendaMascotas tienda;
     private VentanaPrincipal ventana;
     private Random random= new Random();
     private Timer timerClientes;
 
+    /**
+     * Se inicializa el controlador principal del juego.
+     * Conecta los eventos de la interfaz, actualiza la pantalla inicial y
+     * comienza la programación de clientes aleatorios.
+     * @param tienda El modelo principal que administra mascotas, suministros y presupuesto.
+     * @param ventana La ventana principal que muestra la interfaz gráfica.
+     */
     public ControladorJuego(TiendaMascotas tienda, VentanaPrincipal ventana){
         this.tienda=tienda;
         this.ventana=ventana;
@@ -27,7 +38,10 @@ public class ControladorJuego {
         iniciarLlegadaClienteAleatorio();
     }
 
-    //metodo que contiene todos los listeners para cada acción
+    /**
+     * Se conectan los botones de la interfaz con las acciones correspondientes
+     * del controlador.
+     */
     private void conectarEventos(){
         ventana.getMercadoPanel().getBtnComprarPerro().addActionListener(e ->
                 comprarMascotaConFactory(new PerroFactory(), "Perro", 500));
@@ -67,7 +81,14 @@ public class ControladorJuego {
         ventana.getBtnVender().addActionListener(e -> venderMascota());
     }
 
-    //metodo para poder comprar una mascota en el ActionEvent con un factory
+    /**
+     * Se compra una mascota utilizando una fábrica concreta.
+     * Solicita el nombre de la mascota, la crea, la agrega a la tienda y
+     * registra la acción en el panel de alertas.
+     * @param factory La fábrica encargada de crear el tipo concreto de mascota.
+     * @param tipoMascota El nombre visible del tipo de mascota que se comprará.
+     * @param precio El precio de compra que será descontado del presupuesto.
+     */
     private void comprarMascotaConFactory(MascotaFactory factory, String tipoMascota, int precio){
         try{
             String nombre = JOptionPane.showInputDialog(
@@ -94,7 +115,12 @@ public class ControladorJuego {
         }
     }
 
-    //metodo para comprar suministros de tipo correspondiente
+    /**
+     * Se compran suministros para la tienda y se actualiza la interfaz.
+     * @param tipoSuministro El tipo de suministro que se comprará.
+     * @param cantidad La cantidad de unidades que se agregará al inventario.
+     * @param precioPorUnidad El precio individual de cada suministro.
+     */
     private void comprarSuministro(TipoSuministro tipoSuministro, int cantidad, int precioPorUnidad){
         try{
             tienda.comprarSuministro(tipoSuministro, cantidad, precioPorUnidad);
@@ -110,7 +136,11 @@ public class ControladorJuego {
         }
     }
 
-    //metodo para obtener la mascota seleccionada para todos los metodos que lo necesiten
+    /**
+     * Se obtiene la mascota seleccionada en el panel de inventario.
+     * Si no existe selección, se muestra un mensaje de error.
+     * @return La mascota seleccionada, o null si no hay ninguna mascota seleccionada.
+     */
     private Mascota obtenerMascotaSeleccionada(){
         int indice = ventana.getInventarioPanel().getIndiceMascotaSeleccionada();
 
@@ -121,7 +151,9 @@ public class ControladorJuego {
         return tienda.getMascotas().get(indice);
     }
 
-    //metodo alimenta a la mascota seleccionada
+    /**
+     * Se alimenta la mascota seleccionada y se refresca la información visual.
+     */
     private void alimentarMascota(){
         try{
             Mascota mascota = obtenerMascotaSeleccionada();
@@ -143,7 +175,9 @@ public class ControladorJuego {
         }
     }
 
-    //metodo juega con la mascota seleccionada
+    /**
+     * Se juega con la mascota seleccionada y se refresca la información visual.
+     */
     private void jugarConMascota(){
         try {
             Mascota mascota = obtenerMascotaSeleccionada();
@@ -165,7 +199,9 @@ public class ControladorJuego {
         }
     }
 
-    //metodo limpia el habitat de la mascota seleccionada
+    /**
+     * Se limpia el hábitat de la mascota seleccionada y se refresca la información visual.
+     */
     private void limpiarHabitat(){
         try{
             Mascota mascota = obtenerMascotaSeleccionada();
@@ -187,7 +223,9 @@ public class ControladorJuego {
         }
     }
 
-    //metodo da medicina a la mascota seleccionada
+    /**
+     * Se entrega medicina a la mascota seleccionada y se refresca la información visual.
+     */
     private void darMedicina(){
         try{
             Mascota mascota = obtenerMascotaSeleccionada();
@@ -209,7 +247,9 @@ public class ControladorJuego {
         }
     }
 
-    //metodo vende mascota seleccionada
+    /**
+     * Se vende la mascota seleccionada y se actualiza el presupuesto de la tienda.
+     */
     private void venderMascota(){
         try{
             Mascota mascota = obtenerMascotaSeleccionada();
@@ -231,7 +271,10 @@ public class ControladorJuego {
         }
     }
 
-    //metodo usado para refrescar la pantalla después de cualquier acción
+    /**
+     * Se refrescan los datos principales de la interfaz después de una acción.
+     * Actualiza presupuesto, stock de suministros y lista de mascotas.
+     */
     private void refrescarPantalla(){
         ventana.actualizarPresupuesto(tienda.getPresupuesto());
 
@@ -240,7 +283,10 @@ public class ControladorJuego {
         ventana.getInventarioPanel().refrescarListaMascotas(tienda.getMascotas());
     }
 
-    //metodo para mostrar un mensaje de error formateado
+    /**
+     * Se muestra un mensaje de error en una ventana emergente.
+     * @param mensaje El texto que se mostrará al usuario.
+     */
     private void mostrarError(String mensaje){
         JOptionPane.showMessageDialog(
                 ventana,
@@ -250,20 +296,26 @@ public class ControladorJuego {
         );
     }
 
-    //metodo para registrar cada acción, se utiliza después de cada acción ejecutada correctamente
+    /**
+     * Se registra una acción del sistema dentro del panel de alertas.
+     * @param tipoAccion La categoría de la acción realizada.
+     * @param mensaje El detalle de la acción que se mostrará al usuario.
+     */
     private void registrarAccion(String tipoAccion, String mensaje){
         ventana.getPanelAlertas().actualizarAlerta("Sistema", tipoAccion, mensaje);
     }
 
     /**
-     * Inicia la llegada de clientes al ejecutar
+     * Se inicia el sistema de llegada aleatoria de clientes.
      */
     private void  iniciarLlegadaClienteAleatorio(){
         programarLlegadaClienteNuevo();
     }
 
     /**
-     * Obtiene el precio de cada mascota
+     * Se obtiene el precio de venta asociado a cada tipo de mascota.
+     * @param tipoMascota El tipo de mascota cuyo precio se desea consultar.
+     * @return El precio de venta configurado para ese tipo de mascota.
      */
     private int obtenerPrecioAnimal(TipoMascota tipoMascota){
         return switch (tipoMascota){
@@ -275,8 +327,9 @@ public class ControladorJuego {
     }
 
     /**
-     * Procesa los datos del cliente al llegar, decide
-     * aleatoriamente si quiere comprar o no
+     * Se procesa la llegada de un cliente virtual.
+     * Genera el cliente, decide aleatoriamente si desea comprar y, si corresponde,
+     * intenta realizar la venta de una mascota disponible.
      */
     private void procesarLlegadaCliente(){
         ClienteVirtual clienteVirtual= generarElClienteAleatorio();
@@ -304,7 +357,8 @@ public class ControladorJuego {
     }
 
     /**
-     * Esta parte se encarga de programar cada cuanto llega un nuevo cliente
+     * Se programa la llegada del siguiente cliente con un tiempo aleatorio.
+     * Cada vez que llega un cliente, se procesa su visita y se agenda uno nuevo.
      */
     private void programarLlegadaClienteNuevo(){
         int tiempoAleatorio= 30000+ random.nextInt(30001);
@@ -319,9 +373,9 @@ public class ControladorJuego {
     }
 
     /**
-     * se genera un cliente con alguno de los nombres dentro de la lista,
-     * tambien elige aleatoriamente una mascota la cual decida comprar el
-     * cliente y su presupuesto
+     * Se genera un cliente virtual con nombre, tipo de mascota buscada y
+     * presupuesto elegidos aleatoriamente.
+     * @return Un nuevo ClienteVirtual listo para ser procesado por el controlador.
      */
     private ClienteVirtual generarElClienteAleatorio(){
         String[] nombres= { "Joaquin", "Alan", "Bastian", "Matias", "Gabriel", "Francisco", "Eduardo", "Maite", "Sergio", "Daniela", "Mirella", "Abelardo", "Maria", "Sebastian", "Mateo", "Simon", "Audilia", "Valentina", "Amanda", "Lucas"};
