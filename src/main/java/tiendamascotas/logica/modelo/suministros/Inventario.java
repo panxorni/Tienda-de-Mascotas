@@ -4,14 +4,16 @@ import java.util.EnumMap;
 import java.util.Map;
 
 /**
- * Esta clase representa el inventario de la tienda, con sus suministros
- * y guarda la cantidad disponible de cada suministro
+ * Clase que representa el inventario de suministros de la tienda.
+ * Guarda la cantidad disponible de cada TipoSuministro y permite
+ * consultar, agregar o consumir unidades del stock.
  */
 public class Inventario {
     private Map<TipoSuministro, Integer> suministros;
 
     /**
-     * Se crea el inventario
+     * Se inicializa el inventario con todos los tipos de suministro registrados
+     * y con cantidad inicial igual a cero.
      */
     public Inventario(){
         suministros = new EnumMap<>(TipoSuministro.class);
@@ -22,14 +24,18 @@ public class Inventario {
     }
 
     /**
-     * Consulta la cantidad de un tipo de suministros que hay
+     * Se consulta la cantidad disponible de un tipo de suministro.
+     * @param tipo El tipo de suministro que se desea consultar.
+     * @return La cantidad disponible del suministro indicado.
      */
     public int consultarCantidad(TipoSuministro tipo){
         return suministros.getOrDefault(tipo, 0);
     }
 
     /**
-     * Agrega al inventario los suministros del tipo que se agreguen
+     * Se agregan unidades de un suministro al inventario.
+     * @param tipo El tipo de suministro que se agregará.
+     * @param cantidad La cantidad de unidades que se sumará al stock.
      */
     public void agregarSuministro(TipoSuministro tipo, int cantidad){
         if(cantidad<=0){
@@ -41,7 +47,9 @@ public class Inventario {
     }
 
     /**
-     * Este metodo usa una cantidad de suministro y lo resta de lo que tenia inicialmente
+     * Se consumen unidades de un suministro y se descuentan del inventario.
+     * @param tipo El tipo de suministro que se usará.
+     * @param cantidad La cantidad de unidades que se descontará del stock.
      */
     public void usarSuministro(TipoSuministro tipo, int cantidad){
         if(cantidad <=0){
@@ -57,7 +65,9 @@ public class Inventario {
     }
 
     /**
-     * Devuelve una copia del inventario, hace que el stock interno no se cambie
+     * Se obtiene una copia del inventario actual.
+     * De esta forma, el stock interno no puede modificarse directamente desde fuera.
+     * @return Un mapa con los tipos de suministro y sus cantidades disponibles.
      */
     public Map<TipoSuministro, Integer> getSuministros(){
         return new EnumMap<>(suministros);
