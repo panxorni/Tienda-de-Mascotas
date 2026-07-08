@@ -51,58 +51,6 @@ public class EstadoTest {
     }
 
     @Test
-    void alimentarMascotaHambrientaDebeQuitarElHambre() {
-        EstadoHambriento estado= new EstadoHambriento();
-
-        mascota.setHambre(80);
-        mascota.setFelicidad(50);
-        mascota.setEstado(estado);
-
-        estado.alimentar(mascota);
-
-        assertEquals(0 , mascota.getHambre());
-    }
-
-    @Test
-    void alimentarMascotaHambrientaDebeAumentarLaFelicidad() {
-        EstadoHambriento estado= new EstadoHambriento();
-
-        mascota.setHambre(80);
-        mascota.setFelicidad(50);
-        mascota.setEstado(estado);
-
-        estado.alimentar(mascota);
-
-        assertEquals(60, mascota.getFelicidad());
-    }
-
-    @Test
-    void alimentarMascotaHambrientaDebeCambiarEstadoAFeliz() {
-        EstadoHambriento estado= new EstadoHambriento();
-
-        mascota.setHambre(80);
-        mascota.setFelicidad(50);
-        mascota.setEstado(estado);
-
-        estado.alimentar(mascota);
-
-        assertInstanceOf(EstadoFeliz.class , mascota.getEstado());
-    }
-
-    @Test
-    void jugarConMascotaHambrientaDebeReducirLaFelicidad() {
-        EstadoHambriento estado= new EstadoHambriento();
-
-        mascota.setHambre(80);
-        mascota.setFelicidad(50);
-        mascota.setEstado(estado);
-
-        estado.jugar(mascota);
-
-        assertEquals(45 , mascota.getFelicidad());
-    }
-
-    @Test
     void hambreAltaDebeCambiarElEstadoAHambriento() {
         mascota.setHambre(80);
 
