@@ -84,7 +84,7 @@ public class EstadoTest {
     }
 
     @Test
-    void hambreEn70NoEsHambriento_porSerMayorStricto() {
+    void hambreEn70NoEsHambriento() {
         // El umbral para Hambriento es > 70, por lo que 70 debe dejarla Feliz
         mascota.setHambre(70);
         assertInstanceOf(EstadoFeliz.class, mascota.getEstado());
