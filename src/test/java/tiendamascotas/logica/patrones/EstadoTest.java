@@ -65,4 +65,48 @@ public class EstadoTest {
 
         assertInstanceOf(EstadoFeliz.class, mascota.getEstado());
     }
+
+    @Test
+    void estadoInicialDebeSerSaludable() {
+        // Al crearse una mascota, por defecto debe ser Saludable
+        assertInstanceOf(EstadoSaludable.class, mascota.getEstado());
+    }
+
+    @Test
+    void bajarHambreDesdeHambrientoDebeRegresarAFeliz() {
+        // Poner hambre alta => Hambriento
+        mascota.setHambre(90);
+        assertInstanceOf(EstadoHambriento.class, mascota.getEstado());
+
+        // Reducir el hambre por alimentarla => vuelve a evaluar y debe ser Feliz
+        mascota.setHambre(20);
+        assertInstanceOf(EstadoFeliz.class, mascota.getEstado());
+    }
+
+    @Test
+    void hambreEn70NoEsHambriento_porSerMayorStricto() {
+        // El umbral para Hambriento es > 70, por lo que 70 debe dejarla Feliz
+        mascota.setHambre(70);
+        assertInstanceOf(EstadoFeliz.class, mascota.getEstado());
+    }
+
+    @Test
+    void hambreAltaTienePrecedenciaSobreSaludYFelicidad() {
+        // Aunque salud y felicidad sean altas, el hambre >70 debe forzar Hambriento
+        mascota.setSalud(100);
+        mascota.setFelicidad(100);
+        mascota.setHambre(75);
+
+        assertInstanceOf(EstadoHambriento.class, mascota.getEstado());
+    }
+
+    @Test
+    void saludIgual60ImpideEstadoFeliz() {
+        // Salud debe ser > 60 para ser Feliz; con 60 no alcanza
+        mascota.setSalud(60);
+        mascota.setFelicidad(100);
+        mascota.setHambre(0);
+
+        assertInstanceOf(EstadoSaludable.class, mascota.getEstado());
+    }
 }
