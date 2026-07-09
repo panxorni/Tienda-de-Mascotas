@@ -31,17 +31,18 @@ Uno de los primeros problemas fue definir correctamente las relaciones include y
 También fue necesario decidir cómo representar al cliente virtual. Como este cliente no es controlado directamente por una persona, inicialmente existieron dudas sobre como crearlo, pero al final se decidió incluirlo de manera que llegara entre un rango de tiempo aleatorio.
 
 # Decisiones tomadas para la implementación de los casos
-### 1. Fijar un presupuesto inicial alto para poder realizar cualquier acción, la cantidad de veces que uno quiera, para probar todas las funciones.
-### 2. El jugador tiene la capacidad de vender las mascotas directamente como dice el diagrama de casos, pero la manera principal de venta es a través de las ofertas de los clientes virtuales.
-### 3. Las mascotas "nacen" con estadisticas perfectas para simplificar la creación de estas. Esta desición trae que todas las máscotas empiecen con el mismo estado, lo cual no es lo más realista, pero para esta implementación es suficiente.
-### 4. El jugador puede curar, alimentar, limpiar habitat y jugar con las mascotas como esta definido en los casos de uso. Las acciones se pueden realizar seleccionando una mascota en el panel y apretando el boton de la acción.
-### 5. Para poder realizar cualquier accion que requiera suministros, como curar y alimentar, se necesita tener stock de este. El jugador puede comprar medicina y comida especifica para cada mascota actualizando el dinero del presupuesto.
-### 6. Las mascotas se muestran en la aplicación como una lista en medio de la pantalla. La información del estado y estadistica de mascota se puede ver en todo momento.
-### 7. Cuando el estado de una mascota cambia es notificado con una alerta.
-### 8. Todas las acciones son registradas en el panel de alertas.
-### 9. Warnings y mensajes de error hacen pop up con el mensaje correspondiente en medio de la pantalla.
-### 10. Los clientes virtuales llegan a la tienda a intervalos de tiempo aleatorios.
-### 11. Los clientes virtuales tienen un presupuesto y deciden si comprar o no una mascota de manera aleatoria y automatica.
+Para implementar los casos se definieron las siguientes reglas y comportamientos:
+ 1. Fijar un presupuesto inicial alto para poder realizar cualquier acción, la cantidad de veces que uno quiera, para probar todas las funciones.
+ 2. El jugador tiene la capacidad de vender las mascotas directamente como dice el diagrama de casos, pero la manera principal de venta es a través de las ofertas de los clientes virtuales.
+ 3. Las mascotas "nacen" con estadisticas perfectas para simplificar la creación de estas. Esta desición trae que todas las máscotas empiecen con el mismo estado, lo cual no es lo más realista, pero para esta implementación es suficiente.
+ 4. El jugador puede curar, alimentar, limpiar habitat y jugar con las mascotas como esta definido en los casos de uso. Las acciones se pueden realizar seleccionando una mascota en el panel y apretando el boton de la acción.
+5. Para poder realizar cualquier accion que requiera suministros, como curar y alimentar, se necesita tener stock de este. El jugador puede comprar medicina y comida especifica para cada mascota actualizando el dinero del presupuesto.
+ 6. Las mascotas se muestran en la aplicación como una lista en medio de la pantalla. La información del estado y estadistica de mascota se puede ver en todo momento.
+ 7. Cuando el estado de una mascota cambia es notificado con una alerta.
+ 8. Todas las acciones son registradas en el panel de alertas.
+ 9. Warnings y mensajes de error hacen pop up con el mensaje correspondiente en medio de la pantalla.
+ 10. Los clientes virtuales llegan a la tienda a intervalos de tiempo aleatorios.
+ 11. Los clientes virtuales tienen un presupuesto y deciden si comprar o no una mascota de manera aleatoria y automatica.
 
 # Autocrítica
 Como autocrítica, consideramos que el diagrama de casos de uso podría haberse definido con mayor detalle ya que al momento de crearlo no fuimos  lo suficientemente  acertados. 
